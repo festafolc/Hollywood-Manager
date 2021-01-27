@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hollywood Manager</title>
+  <link rel="stylesheet" href="">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+    integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <button class="navbar-toggler" data-target="#menu" data-toggle="collapse" type="button">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="menu">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a href="#" class="nav-link">Hollywood</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a href="#people" class="nav-link">People</a>
+          </li>
+          <li class="nav-item">
+            <a href="#movies" class="nav-link">Movies</a>
+          </li>
+          <li class="nav-item">
+            <a href="#studios" class="nav-link">Studios</a>
+          </li>
+          <li class="nav-item">
+            <a href="#cinemas" class="nav-link">Cinemas</a>
+          </li>
+          <li id = "openEditProfile" class="nav-item">
+            <a class="nav-link" data-toggle="modal" data-target="#makeEdit">Edit profile</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="modal" data-target="#makeLogin">Log in</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="modal" data-target="#makeSignUp">Sign Up</a>
+          </li>
+        </ul>
+        <form class="form-inline">
+          <input class="form-control mr-sm-2" placeholder="Search">
+          <button class="btn btn-success">Search</button>
+        </form>
+      </div>
+    </nav>
+    <div class="modal fade" role="dialog" id="makeLogin">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-body">
+            <form class="form" action="/users/login" method="POST">
+              <h3 class="font-weight-bold">Login!</h3>
+              <input type="text" id="usernameLog" name="username" class="form-control" placeholder="username" required>
+              <input type="password" id="passwordLog" name="password" class="form-control" placeholder="password" required>
+              <button type="submit" onclick="regLog.login()" class="btn btn-success">Login</button>
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" role="dialog" id="makeSignUp">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-body">
+            <form class="form" action="/users/register" method="POST">
+              <h3 class="font-weight-bold">Register!</h3>
+              <input type="text" id="name" name="name" class="form-control" placeholder="name" required>
+              <input type="text" id="surname" name="surname" class="form-control" placeholder="surname" required>
+              <input type="email" id="email" name="email" class="form-control" placeholder="email" required>
+              <input type="text" id="username" name="username" class="form-control" placeholder="username" required>
+              <input type="password" id="password" name="password" class="form-control" placeholder="password" required>
+              <button onclick=regLog.register() type="submit" class="btn btn-success">Register</button>
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" role="dialog" id="makeEdit">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-body">
+            <form class="form" action="javascript:void(0);" method="POST">
+              <h3 class="font-weight-bold">Edit!</h3>
+              <input type="text" id="uEn" class="form-control" placeholder="new username">
+              <input type="email" id="uEe" class="form-control" placeholder="new email">
+              <input type="password" id="uEp" class="form-control" placeholder="new password">
+              <button type="submit" onclick="regLog.editUser()" class="btn btn-success">Accept</button>
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="welcome-page">
+      <img id="img-header" class="img-fluid" src="/images/hollywood-header.jpg" alt="Hollywood Picture">
+    </div>
+  </header>
+  <section id="people">
+    <h1 class="section-title">Directors and actors</h1>
+    <div class="container my-3 py-5 text-center">
+      <div class="col-container row mt-4">
+        <div class="col-lg-3 col-md-5">
+          <div class="card">
+            <div class="card-body">
+              <img src="/images/Brad-Pitt.jpg" alt="Brad Pitt" class="img-fluid rounded-circle w-50 mb-3">
+              <h3>Brad Pitt</h3>
+              <h5>Actor</h5>
+            </div>
+            <div class="card-footer text-muted">
+              <button class="favourites" onclick="app.starPeople(this)" data-key="Brad Pitt">
+                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+               </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-5">
+          <div class="card">
+            <div class="card-body">
+              <img src="/images/Will-Smith.jpg" alt="Brad Pitt" class="img-fluid rounded-circle w-50 mb-3">
+              <h3>Will Smith</h3>
+              <h5>Actor</h5>
+            </div>
+            <div class="card-footer text-muted">
+              <button class="favourites" onclick="app.starPeople(this)" data-key="Will Smith">
+                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+               </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-5">
+          <div class="card">
+            <div class="card-body">
+              <img src="/images/Quentin-Tarantino.jpg" alt="Brad Pitt" class="img-fluid rounded-circle w-50 mb-3">
+              <h3>Quentin Tarantino</h3>
+              <h5>Director</h5>
+            </div>
+            <div class="card-footer text-muted">
+              <button data-key="Quentin Tarantino" class="favourites" onclick="app.starPeople(this)" data-key="Quentin Tarantino">
+                <svg height="1em" viewBox="0 0 16 16" class="bi bi-star-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+               </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-5">
+          <div class="card">
+            <div class="card-body">
+              <img src="/images/Guillermo-del-Toro.jpg" alt="Brad Pitt" class="img-fluid rounded-circle w-50 mb-3">
+              <h3>Guillermo del Toro</h3>
+              <h5>Director</h5>
+            </div>
+            <div class="card-footer text-muted">
+              <button class="favourites" onclick="app.starPeople(this)" data-key="Guillermo del Toro">
+                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p id="pFavourites"></p>
+      <hr class="hr-section">
+    </div>
+  </section>
+  <section id="movies">
+    <h1 class="section-title">Movies</h1>
+    <div class="container">
+      <div id="movingVideos" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+          <li data-target="#movingVideos" data-slide-to="0" class="active"></li>
+          <li data-target="#movingVideos" data-slide-to="1"></li>
+          <li data-target="#movingVideos" data-slide-to="2"></li>
+          <li data-target="#movingVideos" data-slide-to="3"></li>
+        </ol>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <div class="embed-responsive embed-responsive-21by9">
+              <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/Nt9L1jCKGnE" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+              </iframe>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="embed-responsive embed-responsive-21by9">
+              <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/6dSKUoV0SNI" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+              </iframe>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="embed-responsive embed-responsive-21by9">
+              <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/MDQd_gaMGoI" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+              </iframe>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="embed-responsive embed-responsive-21by9">
+              <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/AST2-4db4ic" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+              </iframe>
+            </div>
+          </div>
+        </div>
+        <a class="carousel-control-prev" href="#movingVideos" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon"></span>
+          <span class="sr-only">Anterior</span>
+        </a>
+        <a class="carousel-control-next" href="#movingVideos" role="button" data-slide="next">
+          <span class="carousel-control-next-icon"></span>
+          <span class="sr-only">Avançar</span>
+        </a>
+      </div>
+      <hr class="hr-section">
+    </div>
+  </section>
+  <section id="studios">
+    <h1 class="section-title">Studios</h1>
+    <div class="wrapper">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-4">
+            <div class="card">
+              <img class="card-img-top" src="/images/columbia-pictures-card.jpg" alt="columbia pictures">
+              <div class="card-body">
+                <h4 class="card-title">Columbia Pictures</h4>
+                <p class="card-text text-justify">Columbia Pictures Industries, Inc. (commonly known as Columbia
+                  Pictures)
+                  is an American film studio and production and distribution company that is a member of the
+                  Sony Pictures Motion Picture Group, a division of Sony Entertainment's Sony Pictures
+                  Entertainment, itself a subsidiary of the Japanese multinational conglomerate Sony.</p>
+              </div>
+              <div class="card-footer">
+                <div class="col text-center">
+                  <div class="socials">
+                    <a href="https://www.facebook.com/ColumbiaPicturesEntertainment/"><i class="social-icons fa fa-facebook"></i></a>
+                    <a href="https://www.instagram.com/columbiapictures/"><i class="social-icons fa fa-instagram"></i></a>
+                    <a href="https://twitter.com/columbiastudios"><i class="social-icons fa fa-twitter"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="card">
+              <img class="card-img-top" src="/images/20th-Century-Fox-card.jpeg" alt="20th Century Fox">
+              <div class="card-body">
+                <h4 class="card-title">20th Century-Fox</h4>
+                <p class="card-text text-justify">20th Century Studios, Inc. (simply known as 20th Century, or just
+                  20th,
+                  formerly known as the Tweniteth Century Fox Film Corporation)[a][b] is an American film studio
+                  that is a subsidiary of The Walt Disney Studios, a division of The Walt Disney Company.
+                  The studio is located on the Fox Studio Lot in the Century City area of Los Angeles.
+                  Walt Disney Studios Motion Pictures distributes and markets the films produced by 20th Century
+                  Studios.</p>
+              </div>
+              <div class="card-footer">
+                <div class="col text-center">
+                  <div class="socials">
+                    <a href="https://www.facebook.com/20thCenturyStudiosPT"><i class="social-icons fa fa-facebook"></i></a>
+                    <a href="https://www.instagram.com/20thcenturypt/"><i class="social-icons fa fa-instagram"></i></a>
+                    <a href="https://twitter.com/20thcentury"><i class="social-icons fa fa-twitter"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="card">
+              <img class="card-img-top" src="/images/Warner-Bros-card.jpg" alt="Warner Bros">
+              <div class="card-body">
+                <h4 class="card-title">Warner Bros</h4>
+                <p class="card-text text-justify">Warner Bros. Entertainment Inc. (commonly known as Warner Bros. and
+                  abbreviated as WB;
+                  formerly traded as Warner Bros. Inc.) is an American diversified multinational mass media and
+                  entertainment
+                  conglomerate headquartered at the Warner Bros. Studios complex in Burbank, California, and a
+                  subsidiary of
+                  AT&T's WarnerMedia through its Studios and Networks Group division. </p>
+              </div>
+              <div class="card-footer">
+                <div class="col text-center">
+                  <div class="socials">
+                    <a href="https://www.facebook.com/WarnerBrosPortugal/?brand_redir=137782652917951"><i class="social-icons fa fa-facebook"></i></a>
+                    <a href="https://www.instagram.com/wbpictures/"><i class="social-icons fa fa-instagram"></i></a>
+                    <a href="https://twitter.com/wbpictures"><i class="social-icons fa fa-twitter"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr class="hr-section">
+      </div>
+    </div>
+  </section>
+  <section id="cinemas">
+    <h1 class="section-title">Cinemas</h1>
+    <div class="container my-3 py-5 text-center">
+      <div class="col-container row mt-4">
+        <div class="col-lg-3 col-md-5">
+          <div class="card">
+            <img class="card-img-top" src="/images/New-Beverly-Cinema.jpg" alt="New-Beverly-Cinema">
+            <div class="card-body">
+              <h4 class="card-title">New Beverly Cinema</h4>
+              <p class="card-text text-justify">The New Beverly Cinema may have the most colorful history of any movie theater in Los Angeles.
+                It has been home to a candy maker, a nightclub called Slapsy Maxie’s and an X-rated theatre. And that’s not the half of it.
+                In December 2007, Oscar-winning filmmaker Quentin Tarantino bought the building that houses the New Beverly Cinema.
+                Tarantino famously said, "As long as I'm alive, and as long as I'm rich, the New Beverly will be there, showing double features
+                in 35mm." Beginning in September 2014, Tarantino took over the programming duties. Many of the 35mm and 16mm prints shown are
+                from his private collection.</p>
+            </div>
+            <div class="card-footer text-muted">
+              <button class="favourites" onclick="app.starCinemas(this)" data-key="New Beverly Cinema">
+                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+               </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-5">
+          <div class="card">
+            <img class="card-img-top" src="/images/Regal-Cinemas-L.A.-LIVE-Cinema.jpg" alt="Regal-Cinemas-L.A.-LIVE-Cinema">
+            <div class="card-body">
+              <h4 class="card-title">Regal Cinemas L.A. LIVE Cinema</h4>
+              <p class="card-text text-justify">There’s a reason many studios are hosting their premieres at the Regal L.A. LIVE Stadium 14:
+                the 800-seat premiere cinema is one of the largest stadium auditoriums in the country. There are 13 additional auditoriums,
+                including one featuring 4DX. What’s 4DX? Imagine watching a car chase and having your movie seat lean this way and that, or
+                venturing through a waterfall on screen and feeling a gentle mist. The 4DX theater is like a movie and a theme park ride
+                rolled into one. Have a sweet tooth? Don’t miss the Oreo churros at the concession stand.</p>
+            </div>
+            <div class="card-footer text-muted">
+              <button class="favourites" onclick="app.starCinemas(this)" data-key="Regal Cinemas L.A. LIVE-Cinema">
+                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+               </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-5">
+          <div class="card">
+            <img class="card-img-top" src="/images/Alamo-Drafthousex-Cinema.jpeg" alt="Alamo-Drafthousex-Cinema">
+            <div class="card-body">
+              <h4 class="card-title">Alamo Drafthousex Cinema</h4>
+              <p class="card-text text-justify">The long-delayed Alamo Drafthouse has finally opened at The Bloc in Downtown L.A. The first
+                Los Angeles location of the acclaimed theatre chain features 12 screens and the Video Vortex, a multi-purpose lounge with a
+                full bar, 45+ beers on tap, Tex-Mex food menu, vintage arcade games, board games, and more than 40,000 Blu-rays and DVDs
+                available for FREE rental. The movie themed cocktails range from classics like the French 75 (as ordered in Casablanca) and
+                the James Bond-inspired Vesper, to modern signatures like Inherent Vice and Bridesmaids. Signature movie series include
+                Afternoon Tea (period films served with tea and treats) and Old Fashioned, featuring cinema classics paired with craft cocktails.
+                </p>
+            </div>
+            <div class="card-footer text-muted">
+              <button data-key="Quentin Tarantino" class="favourites" onclick="app.starCinemas(this)" data-key="Alamo Drafthousex Cinema">
+                <svg height="1em" viewBox="0 0 16 16" class="bi bi-star-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+               </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-5">
+          <div class="card">
+            <img class="card-img-top" src="/images/ArcLight-Cinemas.jpg" alt="ArcLight-Cinemas">
+            <div class="card-body">
+              <h4 class="card-title">ArcLight Cinemass</h4>
+              <p class="card-text text-justify">ArcLight Cinemas has multiple venues across the Los Angeles area. But only the Hollywood location has the Dome,
+                the iconic, larger than life dimpled golf ball which was declared a Los Angeles Historic-Cultural monument in 1998. And for good reason.
+                The movie theater opened in 1963 as the Cinerama Dome with the premiere of It’s a Mad, Mad, Mad, Mad World and has since hosted a number of
+                other film and television premieres over the years. While some might associate the theater with blockbusters - who can forget the bright
+                yellow Minion that recently took over the dome - you can often find first-run documentaries and classics on any one of the 15 screens.
+                Try the signature caramel corn mixed with regular popcorn for a sweet and salty treat.</p>
+            </div>
+            <div class="card-footer text-muted">
+              <button class="favourites" onclick="app.starCinemas(this)" data-key="ArcLight Cinemas">
+                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p id="pFavouritesCinemas"></p>
+      <hr class="hr-section">
+    </div>
+  </section>
+  <section id="contact">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center my-5">
+          <h2 class="mt-5"></i>Send us a message</h2>
+          <div id="map-container-google" class="z-depth-1-half map-container" style="height: 500px">
+            <iframe id = "hollywoodMap" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d26432.72216827861!2d-118.33332097967265!3d34.09282784509109!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c2bf07045279bf%3A0xf67a9a6797bdfae4!2sHollywood%2C%20Los%20%C3%81ngeles%2C%20California%2C%20EE.%20UU.!5e0!3m2!1ses!2spt!4v1606651259301!5m2!1ses!2spt"></iframe>
+          </div>
+        </div>
+      </div>
+      <div class="row justify-content-center mb-5">
+        <div class="col-sm-8">
+          <form>
+            <div class="form-row">
+              <div class="col">
+                <input type="text" class="form-control" placeholder="Name">
+              </div>
+              <div class="col">
+                <input type="text" class="form-control" placeholder="Surname">
+              </div>
+            </div>
+            <div class="form-row mt-2">
+              <div class="col">
+                <input type="text" class="form-control" placeholder="Email">
+              </div>
+              <div class="col">
+                <input type="text" class="form-control" placeholder="Phone number">
+              </div>
+            </div>
+            <div class="form-group mt-2">
+              <label for="sendMessage">Write here your message</label>
+              <textarea class="form-control" id="sendMessage" rows="3"></textarea>
+              <small class="form-text text-muted">We never share your data with anyone</small>
+            </div>
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input">
+              <label class="form-check-label"> Agree our terms and conditions</label>
+            </div>
+            <button type="submit" class="btn btn-primary mt-2">Send</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+<footer class="page-footer">
+  <div class="container py-3">
+    <div class="row">
+      <div class="col-lg-3 col-sm-6 pb-2">
+        <h4>About Us</h4>
+        <p>Hollywood Manager offers you the best way to build your own entertaiment industry wherever you are.</p>
+      </div>
+      <div class="col-lg-3 col-sm-6 pb-2">
+        <h4>Usefull links</h4>
+        <ul class="list-unstyled">
+          <li><a href="">Home</a></li>
+          <li><a href="">People</a></li>
+          <li><a href="">Movies</a></li>
+          <li><a href="">Studios</a></li>
+          <li><a href="">Cinemas</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-3 col-sm-6 pb-2">
+        <h4>Contact Us</h4>
+        <p>
+          <address>Hollywood, Los Angeles, USA</address>
+          <strong>Phone</strong> +1 1234567890<br>
+          <strong>Email</strong><a href="mailto:test@test.com"> test@test.com</a>
+        </p>
+      </div>
+      <div class="col-lg-3 col-sm-6 pb-2">
+        <h4>Help</h4>
+        <ul class="list-unstyled">
+          <li><a href="">Frequently asked questions (FAQs)</a></li>
+          <li><a href="">Privacy</a></li>
+          <li><a href="">Cookies policy</a></li>
+          <li><a href="">General conditions</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="text-center bg-secondary py-2">
+    <strong>Hollywood Manager</strong> Copyright &copy; 2020
+  </div>
+</footer>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+    integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js"
+    integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s"
+    crossorigin="anonymous"></script>
+  <script src="app.js"></script>
+</body>
+
+</html>

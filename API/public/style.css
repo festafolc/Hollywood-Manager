@@ -1,0 +1,156 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    background-color: #cecece;
+}
+
+#img-header{
+    width: 100%;
+}
+
+.section-title{
+    text-align: center;
+    margin-top: 80px;
+}
+
+#people img{
+    margin-top: -40px;
+}
+
+#people .card{
+    border-radius: 0;
+    box-shadow: 5px 5px 15px #e74c3c;
+    transition: all 0.3s ease-in;
+    max-height: 300px;
+}
+
+#people .card .card-body{
+    height: 200px;
+}
+
+#people .card .card-body:hover{
+    background: #e74c3c;
+    color: #fff;
+    border-radius: 5px;
+    border: none;
+    box-shadow: 5px 5 px 10px #9E9E9E;
+}
+
+.favourites {
+    background-color: transparent;
+    border: none;
+}
+
+#pFavourites {
+    margin-top: 40px;
+}
+
+#pFavouritesCinemas{
+    margin-top: 40px;
+}
+
+.hr-section{
+    margin-top: 70px;
+}
+
+#people .card img{
+    height: 100px;
+    width: 100px;
+}
+
+.card-img-top{
+    height: 200px;
+}
+
+#studios .card .card-body{
+    max-height: 300px;
+    overflow: auto;
+    transition: all 0.3s ease-in;
+}
+
+#studios .card .card-body:hover{
+    background: #e74c3c;
+    color: #fff;
+    border-radius: 5px;
+    border: none;
+}
+
+#studios .card .social-icons:hover{
+    color: #e74c3c;
+    transform: translateZ(3px) scale(1.1);
+}
+
+.map-container-5{
+    overflow:hidden;
+    padding-bottom:56.25%;
+    position:relative;
+    height:0;
+    }
+
+.map-container-5 iframe{
+    left:0;
+    top:0;
+    height:100%;
+    width:100%;
+    position:absolute;
+}
+
+.map-container-6{
+    overflow:hidden;
+    padding-bottom:56.25%;
+    position:relative;
+    height:0;
+    }
+
+.map-container-6 iframe{
+left:0;
+top:0;
+height:100%;
+width:100%;
+position:absolute;
+}
+
+
+#cinemas .card .card-body{
+    max-height: 300px;
+    overflow: auto;
+    transition: all 0.3s ease-in;
+}
+
+#cinemas .card .card-body:hover{
+    background: #e74c3c;
+    color: #fff;
+    border-radius: 5px;
+    border: none;
+    box-shadow: 5px 5 px 10px #9E9E9E;
+}
+
+#map-container-google{
+    overflow:hidden;
+    padding-bottom:56.25%;
+    position:relative;
+    height:0;
+}
+#hollywoodMap{
+    left:0;
+    top:0;
+    height:100%;
+    width:100%;
+    position:absolute;
+    border: none;   
+}
+
+footer {
+    background-color: #9E9E9E;
+}
+footer a{
+    color: #383636ad;
+}
+
+footer a:hover{
+    color: #cecece;
+    text-decoration: none;
+}
