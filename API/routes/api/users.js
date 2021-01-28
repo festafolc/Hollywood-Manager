@@ -62,19 +62,6 @@ router.post('/register', [
 //Login
 router.post('/login', async (req, res, next) => {
     const user = await Users.findOne({ where: { username: req.body.username } })
-    //const admin = await Admin.findOne({ where: { username: req.body.username } })
-    // if (admin) {
-    //     const password = bcrypt.compareSync(req.body.password, admin.password)
-    //     if (password) {
-    //         console.log('login success')
-    //         //res.redirect('../admin')
-    //         res.json({ success: tokenAdmin(admin) })
-    //     } else {
-    //         res.json({ error: 'Password does not match' })
-    //     }
-    // } else {
-    //     res.json({ error: 'Admin does not match' })
-    // }
     if (user) {
         const password = bcrypt.compareSync(req.body.password, user.password)
         if (password) {
@@ -95,16 +82,6 @@ router.post('/login', async (req, res, next) => {
         res.json({ error: 'Username does not match' })
     }
 })
-
-//Creating Token
-// const tokenAdmin = (admin) => {
-//     const payload = {
-//         adminId: admin.id,
-//         createAt: moment().unix(),
-//         expiredAt: moment().add(5, 'minutes').unix()
-//     }
-//     return jwt.encode(payload, 'secret phrase')
-// }
 
 const tokenUser = (user) => {
     const payload = {
